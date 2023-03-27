@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 
 image = cv2.imread("image1.jpg", 0)
-cv2.imshow('image', image)
 
 image_5 = cv2.bitwise_and(image, 0b11111000)
 image_4 = cv2.bitwise_and(image, 0b11110000)
