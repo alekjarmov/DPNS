@@ -4,7 +4,6 @@ import matplotlib as mpl
 import numpy as np
 
 
-# create a new np array compasses
 kernels = np.array([
     [[0, 0, 0], [0, 1, 0], [0, 0, 0]],
     [[1, 1, 0], [1, 0, -1], [0, -1, -1]],
