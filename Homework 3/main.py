@@ -5,7 +5,7 @@ import numpy as np
 import os
 
 image_names = os.listdir("input_images/")
-image_locations = ["input_images/" + name for name in image_names]
+image_locations = ["database/" + name for name in image_names]
 
 for name, path in zip(image_names, image_locations):
     img = cv2.imread(path)
