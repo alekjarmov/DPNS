@@ -83,35 +83,38 @@ def find_image_with_most_inliers(img1, image_list):
 
 
 def main():
-    query_img_index = 1
-    img1 = load_query(query_img_index)
+    # query_img_index = 1
     database_images = load_database()
-
-    img_best, keypoints1, keypoints_best, good_best, i_best, descriptors1, descriptors_best = find_image_with_most_inliers(
-        img1, database_images)
-
-    cv2.imshow("Best matching image", img_best)
-    img1 = load_query_colorized(query_img_index)
-    img_best = load_database_colorized(i_best)
-
-    plt.subplot(121), plt.imshow(img1, cmap='gray'), plt.title('Query image')
-    plt.subplot(122), plt.imshow(img_best, cmap='gray'), plt.title('Best matching image')
-    plt.show()
+    
+    for query_img_index in range(2, -1, -1):
+        img1 = load_query(query_img_index)
 
 
-    img1_keypointed = cv2.drawKeypoints(img1, keypoints1, None, color=(255, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    img_best_keypointed = cv2.drawKeypoints(img_best, keypoints_best, None, color=(255, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    plt.subplot(121), plt.imshow(img1_keypointed, cmap='gray'), plt.title('Query image')
-    plt.subplot(122), plt.imshow(img_best_keypointed, cmap='gray'), plt.title('Best matching image')
-    plt.show()
+        img_best, keypoints1, keypoints_best, good_best, i_best, descriptors1, descriptors_best = find_image_with_most_inliers(
+            img1, database_images)
 
-    img3 = cv2.drawMatches(img1, keypoints1, img_best, keypoints_best, good_best, None, flags=2, matchColor=(255, 255, 0))
-    plt.imshow(img3), plt.show()
+        # cv2.imshow("Best matching image", img_best)
+        img1 = load_query_colorized(query_img_index)
+        img_best = load_database_colorized(i_best)
+
+        plt.subplot(121), plt.imshow(img1, cmap='gray'), plt.title('Query image')
+        plt.subplot(122), plt.imshow(img_best, cmap='gray'), plt.title('Best matching image')
+        plt.show()
 
 
-    matches = [[m] for m in good_best] #cv2.DMatch object]
-    img3 = cv2.drawMatchesKnn(img1, keypoints1, img_best, keypoints_best, matches, None, flags=2, matchColor=(255, 255, 0))
-    plt.imshow(img3), plt.show()
+        img1_keypointed = cv2.drawKeypoints(img1, keypoints1, None, color=(255, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+        img_best_keypointed = cv2.drawKeypoints(img_best, keypoints_best, None, color=(255, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+        plt.subplot(121), plt.imshow(img1_keypointed, cmap='gray'), plt.title('Query image')
+        plt.subplot(122), plt.imshow(img_best_keypointed, cmap='gray'), plt.title('Best matching image')
+        plt.show()
+
+        img3 = cv2.drawMatches(img1, keypoints1, img_best, keypoints_best, good_best, None, flags=2, matchColor=(255, 255, 0))
+        plt.imshow(img3), plt.show()
+
+
+        matches = [[m] for m in good_best] #cv2.DMatch object]
+        img3 = cv2.drawMatchesKnn(img1, keypoints1, img_best, keypoints_best, matches, None, flags=2, matchColor=(255, 255, 0))
+        plt.imshow(img3), plt.show()
 
 
 
